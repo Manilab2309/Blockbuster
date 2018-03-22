@@ -34,6 +34,8 @@ public class Film implements Serializable {
 	private int duration;
 	private String director;
 	private String gender;
+	private float priceRent;
+	private float priceSell;
 	private String status;
 	
 	// Getters and setters
@@ -72,6 +74,18 @@ public class Film implements Serializable {
 	}
 	public void setStatus(String status) {
 		this.status = status;
+	}
+	public float getPriceRent() {
+		return priceRent;
+	}
+	public void setPriceRent(float priceRent) {
+		this.priceRent = priceRent;
+	}
+	public float getPriceSell() {
+		return priceSell;
+	}
+	public void setPriceSell(float priceSell) {
+		this.priceSell = priceSell;
 	}
 	
 }
