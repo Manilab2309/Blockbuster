@@ -3,6 +3,7 @@
  */
 package com.blockbuster.service;
 
+import java.io.Serializable;
 import java.util.List;
 
 import com.blockbuster.entity.Film;
@@ -11,24 +12,18 @@ import com.blockbuster.entity.Film;
  * @author Ramón Cigüenza
  *
  */
-public class FilmService implements FilmManager{
-
+public interface FilmService extends Serializable{
 	
-	public void addFilm(Film film) {
-		System.out.println("Alta de una película");
-	}
+	// Alta de una película
+	public void addFilm(Film film);
 	
-	public List<Film> getFilms() {
-		System.out.println("Consulta de películas");
-		return null;
-	}
-
-	public void deleteFilm(int idFilm) {
-		System.out.println("Borrado de películas");
-	}
-
-	public void updateFilm(Film film) {
-		System.out.println("Actualización de películas");
-	}
+	// Consulta de todas las películas
+	public List<Film> getFilms();
+	
+	// Eliminar una película
+    public void deleteFilm(int idFilm);
+    
+    // Actualizar ficha de una película
+    public void updateFilm(Film film);
 
 }

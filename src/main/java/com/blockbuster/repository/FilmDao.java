@@ -5,12 +5,18 @@ package com.blockbuster.repository;
 
 import java.util.List;
 
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
+
 import com.blockbuster.entity.Film;
 
 /**
  * @author Ramón Cigüenza
  *
  */
+
+
 public interface FilmDao {
 	
 		// Alta de una película
