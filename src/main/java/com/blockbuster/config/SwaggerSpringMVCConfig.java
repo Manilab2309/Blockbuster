@@ -5,7 +5,9 @@ package com.blockbuster.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import com.mangofactory.swagger.configuration.SpringSwaggerConfig;
 import com.mangofactory.swagger.plugin.EnableSwagger;
@@ -18,7 +20,9 @@ import com.wordnik.swagger.model.ApiInfo;
  */
 
 @Configuration
+@EnableWebMvc
 @EnableSwagger
+@ComponentScan("com.blockbuster.controller")
 public class SwaggerSpringMVCConfig {
 	
 	@Autowired
@@ -32,7 +36,7 @@ public class SwaggerSpringMVCConfig {
 	@Bean
 	public SwaggerSpringMvcPlugin customImplementation(){
 		// Aqui especificamos el nombre del patron de las URLs llamada para el API, debe coincidir con el RequestMapping del Controller
-		return new SwaggerSpringMvcPlugin(this.springSwaggerConfig).apiInfo(apiInfo()).includePatterns(".*blockbuster.*");
+		return new SwaggerSpringMvcPlugin(this.springSwaggerConfig).apiInfo(apiInfo()).includePatterns(".*blockbuster/*.*");
 		
 	}
 	

@@ -16,7 +16,7 @@ CREATE TABLE genders(
 
 
 CREATE TABLE films (
-	idFilm int 					NOT NULL,
+	idFilm 		int 			NOT NULL,
 	title 		VARCHAR(100)	NOT NULL,
 	status_film int				NOT NULL,
 	gender_film int			 	NOT NULL,

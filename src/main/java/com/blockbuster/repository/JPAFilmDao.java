@@ -3,21 +3,20 @@
  */
 package com.blockbuster.repository;
 
-import java.lang.annotation.Annotation;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 import javax.persistence.PersistenceContext;
 
-import org.springframework.data.jpa.repository.Query;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.blockbuster.entity.Film;
+import com.blockbuster.store.BlockbusterApplication;
+
+import ch.qos.logback.classic.Level;
 
 /**
  * @author Ramón Cigüenza
@@ -25,52 +24,30 @@ import com.blockbuster.entity.Film;
  */
 
 @Repository
+@Transactional
 public class JPAFilmDao implements FilmDao{
 
-	// Gestor de entidades JavaX persistance
-	//EntityManagerFactory emf = Persistence.createEntityManagerFactory("jcg-JPA");
+	private final Logger logger = LoggerFactory.getLogger(BlockbusterApplication.class);
 	
-	//@PersistenceContext(unitName="data")
+	// Gestor de entidades JavaX persistance
+	@PersistenceContext
 	private EntityManager em;
 	
 	@Transactional(readOnly = false)
 	public void addFilm(Film film) {
 		// Esta sentencia hace un alta
-	//	em.merge(film);
+		em.merge(film);
 	}
 
 	@Transactional(readOnly = true)
     @SuppressWarnings("unchecked")
-	public List<Film> getFilms()
-	 {
-		System.out.println("[RAMON] - Ejecutando capa JPA...");
+	public List<Film> getFilms()	 {
+				
+		String hql= "FROM Film"; 
+		logger.debug("-- Application API Blockbuster: "+JPAFilmDao.class.getName()+ " Consultando todas las películas de la base de Datos: "+hql);
+		return em.createQuery(hql).getResultList(); 
 		
-		
-		List<Film> peliculas = new ArrayList<Film>();
-//		Film f1 = new Film();
-//		f1.setTitle("PELI PRUEBA");
-//		f1.setDirector("Sebastian");
-//		f1.setDuration(100);
-//		f1.setGender("TERROR");
-//		f1.setStatus("DISPONIBLE");
-//		f1.setIdFilm(00001);
-//		
-//		Film f2 = new Film();
-//		f2.setTitle("PELI PRUEBA 2");
-//		f2.setDirector("Gonzalo");
-//		f2.setDuration(112);
-//		f2.setGender("COMEDIA");
-//		f2.setStatus("ALQUILADA");
-//		f2.setIdFilm(00002);
-//		
-//		System.out.println("[RAMON] - Asignando peliculas...");
-//		peliculas.add(f1);
-//		peliculas.add(f2);
-//		
-//		System.out.println("[RAMON] - Devolviendo lista...");
-		return peliculas;
-		//if (em == null){
-		 }
+	}
 
 	
 	public void deleteFilm(int idFilm) {
@@ -84,9 +61,10 @@ public class JPAFilmDao implements FilmDao{
 		
 	}
 
-	@Override
+	
 	public void updateFilm(Film film) {
-		// TODO Auto-generated method stub
+		em.merge(film);
+	    return;
 		
 	}
 

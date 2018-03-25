@@ -10,6 +10,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.Table;
 
 /**
@@ -25,17 +26,27 @@ public class Film implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	// Atributos de películas
+	// Atributos de películas, importante especificar en @Column el nombre de la columna en base de datos
 	@Id
     @Column(name = "idFilm")
-    @GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int idFilm;
+	
+	// No requieren @Column porque en BBDD se llaman igual las columnas
 	private String title;
 	private int duration;
 	private String director;
+	
+	@Column(name = "gender_film")
 	private String gender;
+	
+	@Column(name = "price_rent")
 	private float priceRent;
+	
+	@Column(name = "price_sell")
 	private float priceSell;
+	
+	@Column(name = "status_film")
 	private String status;
 	
 	// Getters and setters
